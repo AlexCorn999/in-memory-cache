@@ -1,4 +1,4 @@
-package inMemoryCache
+package cache
 
 import "errors"
 
