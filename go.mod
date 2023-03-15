@@ -1,3 +1,3 @@
-module github.com/AlexCorn999/in-memory-cache/pkg/cache
+module github.com/AlexCorn999/in-memory-cache
 
 go 1.19
