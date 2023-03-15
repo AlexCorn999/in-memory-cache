@@ -1,3 +1,3 @@
-module myCache
+module cache
 
 go 1.19
