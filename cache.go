@@ -1,26 +1,41 @@
 package inMemoryCache
 
-import "errors"
+import (
+	"errors"
+	"fmt"
+	"time"
+)
+
+type Value struct {
+	Value any
+	Ttl   *time.Duration
+}
 
 type Cache struct {
-	Storage map[string]any
+	Storage map[string]*Value
 }
 
 func New() *Cache {
-	return &Cache{Storage: make(map[string]any)}
+	return &Cache{
+		Storage: make(map[string]*Value),
+	}
 }
 
-func (c *Cache) Set(key string, value any) {
-	c.Storage[key] = value
+func (c *Cache) Set(key string, value any, ttl time.Duration) {
+	c.Storage[key].Value = value
+	c.Storage[key].Ttl = &ttl
 }
 
 func (c *Cache) Get(key string) (any, error) {
+
 	value, ok := c.Storage[key]
 	if !ok {
 		return nil, errors.New("value not found")
 	}
 
-	return value, nil
+	fmt.Println(*value.Ttl)
+
+	return value.Value, nil
 }
 
 func (c *Cache) Delete(key string) error {
