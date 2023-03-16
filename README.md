@@ -12,8 +12,10 @@ go get "github.com/AlexCorn999/inMemoryCache"
   Get(key string) (any, error)
   Delete(key string) error
 ...
+```
 
 # example 1
+
 ```go
 package main
 
