@@ -16,14 +16,16 @@ type Cache struct {
 }
 
 func New() *Cache {
-	return &Cache{
-		Storage: make(map[string]*Value),
-	}
+	return &Cache{make(map[string]*Value)}
 }
 
 func (c *Cache) Set(key string, value any, ttl time.Duration) {
-	c.Storage[key].Value = value
-	c.Storage[key].Ttl = &ttl
+	v := Value{
+		Value: value,
+		Ttl:   &ttl,
+	}
+
+	c.Storage[key] = &v
 }
 
 func (c *Cache) Get(key string) (any, error) {
