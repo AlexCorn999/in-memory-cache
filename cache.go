@@ -2,6 +2,7 @@ package inMemoryCache
 
 import (
 	"errors"
+	"fmt"
 	"sync"
 	"time"
 )
@@ -76,6 +77,7 @@ func (db *Cache) Delete(key string) error {
 	return nil
 }
 
+// начало очистки для всех хранилищ
 func (db *Cache) StartGC() {
 	go db.GC()
 }
@@ -109,6 +111,7 @@ func (db *Cache) expiredKeys() (keys []string) {
 
 	for k, i := range db.storage {
 		if time.Now().UnixNano() > i.DefaultExpiration && i.DefaultExpiration > 0 {
+			fmt.Println("xxxxxxxxx")
 			keys = append(keys, k)
 		}
 	}
