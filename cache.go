@@ -2,7 +2,6 @@ package inMemoryCache
 
 import (
 	"errors"
-	"fmt"
 	"sync"
 	"time"
 )
@@ -102,7 +101,7 @@ func (db *Cache) GC() {
 
 }
 
-// expiredKeys возвращает список "просроченных" ключей
+// возвращает список "просроченных" ключей
 func (db *Cache) expiredKeys() (keys []string) {
 
 	db.RLock()
@@ -111,7 +110,6 @@ func (db *Cache) expiredKeys() (keys []string) {
 
 	for k, i := range db.storage {
 		if time.Now().UnixNano() > i.DefaultExpiration && i.DefaultExpiration > 0 {
-			fmt.Println("xxxxxxxxx")
 			keys = append(keys, k)
 		}
 	}
@@ -119,7 +117,7 @@ func (db *Cache) expiredKeys() (keys []string) {
 	return
 }
 
-// clearItems удаляет ключи из переданного списка, в нашем случае "просроченные"
+// удаляет ключи из переданного списка, в нашем случае "просроченные"
 func (db *Cache) clearItems(keys []string) {
 
 	db.Lock()
