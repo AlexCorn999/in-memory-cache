@@ -4,7 +4,7 @@ ___
 In-memory cache implementation, Go package
 
 ```shell
-go get github.com/AlexCorn999/inMemoryCache@v1.0.2
+go get github.com/AlexCorn999/inMemoryCache@v1.0.3
 ```
 ```go
 ...
